@@ -38,7 +38,7 @@ void TextEditor::insertCharacter(char character){
 /***************Delete a Character******************/
 bool TextEditor::deleteCharacter(){
     if(rightStack.empty()){
-        cout<<"There are no elements to delete. Place the cursor at right position"<<endl;
+        //cout<<"There are no elements to delete. Place the cursor at right position"<<endl;
         return false;
     }
     else{
@@ -51,7 +51,7 @@ bool TextEditor::deleteCharacter(){
 /***************Backspace on a Character******************/
 bool TextEditor::backSpaceCharacter(){
     if(leftStack.empty()){
-        cout<<"There are no elements to perform backspace. Insert elements"<<endl;
+        //cout<<"There are no elements to perform backspace. Insert elements"<<endl;
         return false;
     }
     else{
@@ -63,6 +63,7 @@ bool TextEditor::backSpaceCharacter(){
 
 /*********************Move Cursor*********************/
 void TextEditor::moveCursor(int position){
+    //cout<<"Entered moveCursor"<<endl;
     int leftStackSize,newPosition;
     leftStackSize=leftStack.size();
     if(position<leftStackSize)
@@ -80,6 +81,7 @@ void TextEditor::moveLeft(int position){
     while(position!=leftStackSize){
         rightStack.push(leftStack.top());
         leftStack.pop();
+        leftStackSize=leftStack.size();
     }
 };
 /******************************************************/
@@ -89,11 +91,12 @@ void TextEditor::moveRight(int position){
 
     int rightStackSize=rightStack.size(); //making signed(r.h.s) to unsigned
     if((position==rightStackSize) || (position)>rightStack.size()){
-        cout<<"Cannot move the cursor further towards right"<<endl;
+        cout<<"\nCannot move the cursor further towards right"<<endl;
     }
     while(position!=rightStackSize){
         leftStack.push(rightStack.top());
         rightStack.pop();
+        rightStackSize=rightStack.size();
     }
 };
 /******************************************************/
@@ -101,8 +104,9 @@ void TextEditor::moveRight(int position){
 /***************Find and Replace ******************/
 void TextEditor::findAndReplaceChar(char findWhat, char replaceWith){
     int newPosition=1, originalCursorPosition = leftStack.size();
-
-    moveCursor(0); //move all the elements from left stack to right stack
+    moveCursor(0);
+    printRightStack();
+    //move all the elements from left stack to right stack
     //move elements from right stack to left stack after examining
     while(!rightStack.empty()){
         if(rightStack.top()==findWhat){
@@ -127,6 +131,34 @@ void TextEditor::examineTop(){
     if(rightStack.empty())
         cout<<"rightStack: empty \t";
     else
-        cout<<"rightStack: "<<rightStack.top()<<","<<rightStack.size()<<"\t\t";
+        cout<<"rightStack: "<<rightStack.top()<<","<<rightStack.size()<<"\t\t\n";
 };
 /******************************************************/
+
+/**********************Print the elements in the stack********/
+void TextEditor::printLeftStack(){
+    while(!leftStack.empty()){
+        cout<<leftStack.top()<<"\t";
+        testStack.push(leftStack.top());
+        leftStack.pop();
+    }
+    while(!testStack.empty()){
+        leftStack.push(testStack.top());
+        testStack.pop();
+    }
+};
+/*************************************************************/
+
+/**********************Print the elements in the Right stack********/
+void TextEditor::printRightStack(){
+    while(!rightStack.empty()){
+        cout<<rightStack.top()<<"\t";
+        testStack.push(rightStack.top());
+        rightStack.pop();
+    }
+    while(!testStack.empty()){
+        rightStack.push(testStack.top());
+        testStack.pop();
+    }
+};
+/*************************************************************/
