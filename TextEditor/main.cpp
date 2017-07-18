@@ -5,6 +5,7 @@ using namespace std;
 
 int main()
 {
+    char findWhat ='a', replaceWith='A';
     cout << "Text Editor begins running" << endl;
     char word[10];
     TextEditor txt;
@@ -35,7 +36,10 @@ int main()
             cout<<"Delete characters using DEL:";
         txt.examineTop();
     }
-
-
+    //txt.printLeftStack();
+    //find and replace
+    //txt.findAndReplaceChar(findWhat,replaceWith);
+    //txt.printLeftStack();
+    //txt.printRightStack();
     return 0;
 }
