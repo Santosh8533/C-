@@ -19,12 +19,15 @@ class TextEditor
         void moveRight(int position);
         void findAndReplaceChar(char findWhat, char replaceWith);
         void examineTop();
+        void printLeftStack();
+        void printRightStack();
 
     protected:
 
     private:
         stack<char> leftStack; //Left stack
         stack<char> rightStack; //Right stack
+        stack<char> testStack;  //Test stack
 };
 
 #endif // TEXTEDITOR_H
