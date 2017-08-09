@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1502248271 source:c:\users\tandrs01\desktop\docs\software\c++\mediaplayer\main.cpp
+	<iostream>
+	"MediaPlayer.h"
+
+1502245916 source:c:\users\tandrs01\desktop\docs\software\c++\mediaplayer\src\mediaplayer.cpp
+	"MediaPlayer.h"
+
+1502247636 c:\users\tandrs01\desktop\docs\software\c++\mediaplayer\include\mediaplayer.h
+	<iostream>
+	<list>
+
