@@ -56,6 +56,7 @@ void MediaPlayer::addToPlaylist(string songName, string singer, float duration, 
             it++; //moving the iterator to the position
         }
         playlist.insert(it,s);
+        //cout<< "Song added to the playlist:\t" << it->title << endl;
     }
 
     // insert at the end of the playlist if the position is greater than the size of the playlist
@@ -99,12 +100,103 @@ bool MediaPlayer::goToPrev(){
 
 bool MediaPlayer::goToLast(){
 
-    if(playlist.empty() || it == playlist.begin()){
+    if(playlist.empty()){
+        return false;
+    }
+    else if(++it==playlist.end()){
+        it--; //point to the last song
+        cout << "Last song is playing currently" << endl;
         return false;
     }
     else{
         it = playlist.end();
-        re
+        it--; //Point to the last song
+        return true;
     }
 }
+
+//Go to next song
+bool MediaPlayer::goToNext(){
+
+    //if playlist is empty
+    if(playlist.empty()){
+        return false;
+    }
+    it++;
+    //if iterator points to the last song
+    if(it == playlist.end()){
+
+        it--; //Points to the last song
+        return false;
+    }
+    else{
+        return true;
+    }
+    //general case
+} //end of function
+
+
+//Reverse the playlist
+void MediaPlayer::reversePlaylist(){
+    playlist.reverse();
+} //end of function
+
+//Go to a particular song
+bool MediaPlayer::goToSong(string title){
+
+    //check if playlist is empty
+    if(playlist.empty()){
+        return false;
+    }
+    //create a new iterator to retain original iterator position
+    list<Song>::iterator copy_it;
+    copy_it = it;
+    //Perform string match between input string and the playlist
+    it = playlist.begin();
+    while(it!=playlist.end()){
+        if(title.compare(it->title)==0){
+            return true;
+        }
+        it++;
+    }
+    //restore the original iterator position in the case of song not found
+    it = copy_it;
+    return false;
+}//end of the program
+
+//Remove the song from the playlist
+
+struct removeSong{
+    string title;
+    bool operator()(const Song &s){
+        return (s.title.compare(title)==0);
+    }
+};
+
+bool MediaPlayer::removeFromPlaylist(string SongTitle){
+    removeSong rs;
+    rs.title = SongTitle;
+    playlist.remove_if(removeSong(rs));
+} // end of the function
+
+//sort the songs by the title
+bool byTitle(Song first,Song second){
+    return first.title < second.title;
+}//end of the function
+
+void MediaPlayer::sortTitle(){
+    playlist.sort(byTitle);
+}// end of the function
+
+//sort the songs by the duration
+bool byDuration(Song first, Song second){
+    return first.duration < second.duration;
+}
+
+void MediaPlayer::sortDuration(){
+    playlist.sort(byDuration);
+}
+
+
+
 
