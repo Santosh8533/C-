@@ -25,7 +25,7 @@ class MediaPlayer
         bool goToLast();
         bool goToPrev();
         bool goToNext();
-        bool goToSong ();
+        bool goToSong (string songTitle);
         void reversePlaylist();
         void sortTitle();
         void sortDuration();
