@@ -56,20 +56,23 @@ bool ExpressionEvaluation::evaluate(string str){
     int push_count = 0;
     int pop_count = 0;
     for(int i=0;i<str.length();i++){
-        if(str[i] == '{'){
+        if(str[i] == '{'){ 
             s.push(str[i]);
-            push_count++;
+            //push_count++;
         }
+        //
         else if(str[i] == '}'){
             char c = s.pop();
-            if(c == '{'){
-                pop_count++;
+            if(c != '{'){
+                return false;
+               // pop_count++;
             }
         }
     }
+    return s.isEmpty();
     
-    if(push_count == pop_count)return true;
-    return false;
+    //if(push_count == pop_count)return true;
+    //return false;
     
 
 }
@@ -83,6 +86,10 @@ int main(){
     cout << "Expression is valid:->" << result << endl; 
     return 0;
 }
+
+
+
+
 
 
 
