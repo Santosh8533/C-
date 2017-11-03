@@ -1,9 +1,3 @@
-/******************************************************************************
-
-                       
-
-*******************************************************************************/
-
 #include <iostream>
 
 using namespace std;
@@ -16,12 +10,13 @@ class Cqueue{
     //Only static variables should be initialized inside the class else in the constructor::good practice
     Cqueue(){
         size = 5;
-        front = size-1;
-        rear = size-1;
+        front = 0;
+        rear = 0;
     }
+    bool isQueueEmpty();
+    bool isQueueFull();
     bool enquee(int);
     int dequee();
-    bool isQueueEmpty();
     void printQueue();
 };
 
@@ -34,29 +29,23 @@ bool Cqueue::isQueueEmpty(){
     return false;
 }
 
+/**Difference between front and rear is 1 when queue is fall. rear is always leading**/
+bool Cqueue::isQueueFull(){
+    if(front = (rear+1)%size))return true;
+    return false;
+}
+
 bool Cqueue::enquee(int ele){
-    //1.Check if Queue is full)
-    
-    int temp = (rear + 1) % size;  //rear should not be updated when queue is full
-    if(temp == front){
-        cout << "Queue is full" << endl;
-        return false;
-    }
-    else{
-        rear = temp;// rare should be updated only on successful insertion
-        arr[rear] = ele;
-        //rear++;
-        
-    }
-    //2.Increment rear and insert the element in the rear positon
+    if(isQueueFull()){return false;}
+    arr[rear] = ele;
+    rear = (rear+1)%size;
 }
 
 int Cqueue::dequee(){
-    if(isQueueEmpty()){
-    return -1;
-    }
+    if(isQueueEmpty()){return -1;}
+    int temp = front;
     front = (front+1)%size;
-    return arr[front];
+    return arr[temp];
     
 }
 
@@ -93,6 +82,3 @@ int main()
     q.printQueue();
     return 0;
 }
-
-
-
