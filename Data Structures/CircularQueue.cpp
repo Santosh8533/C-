@@ -1,3 +1,11 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
 #include <iostream>
 
 using namespace std;
@@ -10,14 +18,14 @@ class Cqueue{
     //Only static variables should be initialized inside the class else in the constructor::good practice
     Cqueue(){
         size = 5;
-        front = 0;
-        rear = 0;
+        front = -1;
+        rear = -1;
     }
-    bool isQueueEmpty();
-    bool isQueueFull();
     bool enquee(int);
     int dequee();
+    bool isQueueEmpty();
     void printQueue();
+    bool isQueueFull();
 };
 
 bool Cqueue::isQueueEmpty(){
@@ -29,37 +37,44 @@ bool Cqueue::isQueueEmpty(){
     return false;
 }
 
-/**Difference between front and rear is 1 when queue is fall. rear is always leading**/
 bool Cqueue::isQueueFull(){
-    if(front = (rear+1)%size))return true;
+    
+    if(front == -1 && rear == size-1){front = 0;}
+    if(front == ((rear+1)%size)){
+        cout << "Queue is full" << endl;
+        return true;
+    }
     return false;
 }
 
 bool Cqueue::enquee(int ele){
-    if(isQueueFull()){return false;}
-    arr[rear] = ele;
+    if(isQueueFull()) return false;
+    //rear initial value = -1
     rear = (rear+1)%size;
+    arr[rear] = ele; 
+    cout << "Element inserted" << arr[rear] << endl;
+    return true;
 }
 
 int Cqueue::dequee(){
-    if(isQueueEmpty()){return -1;}
-    int temp = front;
-    front = (front+1)%size;
-    return arr[temp];
-    
+    if(isQueueEmpty())return -1;
+    front = (front+1)% size;
+    cout << "dequeed element" << arr[front] << endl;
+    return arr[front];
 }
 
 void Cqueue::printQueue(){
-    //Startpoint: ear element
+    //Startpoint: rear element
     //endpoint: front element
+    
     int temp = front;
-    while(rear!=front)
-    {
-        front = (front + 1) % size; 
-        cout << "Element" << arr[front] << endl;
+    while(!isQueueEmpty()){
+        cout << "temp->" << temp << endl; 
+        cout << "element:" << arr[temp] << endl;
+        temp = (temp+1)%size;
     }
-    front = temp;
-    cout << "\n_________________ \n";
+    cout << arr[temp] << endl;
+    cout << "______________________________" << endl;
 }
 
 int main()
@@ -72,13 +87,16 @@ int main()
     q.enquee(30);
     q.enquee(40);
     q.enquee(50);
-    q.printQueue();
+    q.enquee(60);
+    //q.printQueue();
     q.dequee();
     q.dequee();
-    q.printQueue();
+   // q.printQueue();
     q.dequee();
     q.dequee();
     q.dequee();
-    q.printQueue();
+    q.dequee();
+    
+    //q.printQueue();
     return 0;
 }
