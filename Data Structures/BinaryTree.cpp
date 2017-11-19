@@ -56,6 +56,7 @@ void BST::insertNode(Node* node){
     if(node->value < root->value){
         insertNode(node,&root->left);
     }
+    
     else if (node->value < root->value){
         insertNode(node,&root->right);
     }
