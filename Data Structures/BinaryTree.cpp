@@ -17,7 +17,7 @@ class BST
     public:
         Node* root;
         Node* createNode(int);
-        void insertNode(Node*, Node*);
+        Node* insertNode(Node*, Node*);
         void insertNode(Node*);
         void del(int);
         void display(Node*, int);
@@ -35,16 +35,16 @@ Node* BST::createNode(int value){
     return node;
 }
 
-void BST::insertNode(Node* node, Node* currentRoot){
+Node* BST::insertNode(Node* node, Node* currentRoot){
     if(currentRoot == nullptr){
-        currentRoot->left = node;
-        return;
+        currentRoot = node;
+        return currentRoot;
     }
     if(node->value < currentRoot->value){
-        insertNode(node,currentRoot->left);
+        currentRoot->left = insertNode(node,currentRoot->left);
     }
     else if(node->value > currentRoot->value){
-        insertNode(node, currentRoot->right);
+        currentRoot->right = insertNode(node, currentRoot->right);
     }
 }
 void BST::insertNode(Node* node){
@@ -54,18 +54,19 @@ void BST::insertNode(Node* node){
         return;
     }
     if(node->value < root->value){
-        insertNode(node,&root->left);
+        insertNode(node,root);
     }
-    
+
     else if (node->value < root->value){
-        insertNode(node,&root->right);
+        insertNode(node,root );
     }
 }
 
 int main()
 {
-    int choice, value, node;
+    int choice, value;
     BST bt;
+    Node *node;
     while(1){
         cout << "1. Insert \n 2. Delete \n 3.Display \n";
         cout << "Enter your choice" << endl;
@@ -74,13 +75,16 @@ int main()
             case 1:
                 cout << "Enter the node to be inserted\n" << endl;
                 cin >> value;
-                Node* node = bt.createNode(value);
+                node = bt.createNode(value);
                 cout << "Node created->" << node->value << endl;
                 bt.insertNode(node);
                 break;
 
+            case 4:
+                cout << "Exit" <<endl;
+                exit(0);
         }
-        exit(0);
+
     }
     return 0;
 }
