@@ -71,7 +71,7 @@ void BST::del(int nodeValue){
 }
 
 Node* BST::del(Node* currentRoot){
-    
+
     Node *next;
     /**
     1. is it a leaf node?
@@ -79,8 +79,8 @@ Node* BST::del(Node* currentRoot){
     3. two child
     ***/
     if(currentRoot->left && currentRoot->right == nullptr){return currentRoot;}
-    
-    
+
+
     //One chid
     if(currentRoot->left == nullptr && currentRoot->right!=nullptr){
         next = currentRoot->right;
@@ -130,11 +130,20 @@ Node* BST::insertNode(Node* node, Node* currentRoot){
 
 }
 
-Node* BST::inorder(Node){
-    Node *temp = root;
-    while(temp!=nullptr){
-        if()
+Node* BST::inorder(Node *currentRoot){
+    if(currentRoot == nullptr){
+        return;
     }
+    if(currentRoot->left!=nullptr){
+        inorder(currentRoot->left);
+    }
+    cout<<currentRoot<<endl;
+
+    if(currentRoot->right!=nullptr){
+        inorder(currentRoot->right);
+    }
+    cout<<currentRoot<<endl;
+    return nullptr;
 }
 void BST::display(){
     preorder(root);
