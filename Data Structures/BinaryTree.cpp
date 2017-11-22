@@ -20,6 +20,7 @@ class BST
         Node* insertNode(Node*, Node*);
         void insertNode(Node*);
         void preorder(Node*);
+        void inorder();
         void del(int);
         Node* del(Node*,Node*);
         Node* findNode(int);
@@ -40,6 +41,7 @@ class BST
     c. node->value = replacenode->value
     d. replacenode = nullptr;
 ***/
+
 
 Node* BST::findNode(int nodeValue){
    // if(root==NULL){cout <<"No tree" << endl;return nullptr;}
@@ -70,6 +72,7 @@ void BST::del(int nodeValue){
 
 Node* BST::del(Node* currentRoot){
     
+    Node *next;
     /**
     1. is it a leaf node?
     2. one child
@@ -80,10 +83,16 @@ Node* BST::del(Node* currentRoot){
     
     //One chid
     if(currentRoot->left == nullptr && currentRoot->right!=nullptr){
-        currentRoot = currentRoot->right;
+        next = currentRoot->right;
+        currentRoot->value = next->value;
+        currentRoot->left = next->left;
+        currentRoot->right = next->right;
     }
     else if(currentRoot->left != nullptr && currentRoot->right==nullptr){
-        
+        next = currentRoot->left;
+        currentRoot->value = next->value;
+        currentRoot->left = next->left;
+        currentRoot->right = next->right;
     }
 
     //3. two children
@@ -121,6 +130,12 @@ Node* BST::insertNode(Node* node, Node* currentRoot){
 
 }
 
+Node* BST::inorder(Node){
+    Node *temp = root;
+    while(temp!=nullptr){
+        if()
+    }
+}
 void BST::display(){
     preorder(root);
 }
