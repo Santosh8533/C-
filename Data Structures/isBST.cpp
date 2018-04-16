@@ -138,8 +138,7 @@ bool BinaryTree::isBST(){
 bool BinaryTree::isBST(Node* currentRoot, int MIN, int MAX){
 
     if(currentRoot==nullptr){return true;}
-    if(currentRoot->value > MIN && currentRoot->value < MAX){return true;}
-    else return false;
+    if(currentRoot->value < MIN || currentRoot->value > MAX){return false;}
     return isBST(currentRoot->left, MIN, currentRoot->value-1) &&
            isBST(currentRoot->right, currentRoot->value+1, MAX);
 }
