@@ -9,9 +9,10 @@ using namespace std;
 class Graph{
     int v;
     list<int> *adj;
-    map<int,list<int>*> myMap;
-    map<int,list<int>*>::iterator it;
+    map<int,list<int>> myMap;
+    map<int,list<int>>::iterator it;
 public:
+    Graph();
     Graph(int);
     void addEdge(int,int);
     void addEdgeUsingMap(int,int);
@@ -19,6 +20,9 @@ public:
     void printAdjListFromMap();
     //void BFS(int);
 };
+
+Graph::Graph(){
+}
 
 Graph::Graph(int v){
     this->v = v;
@@ -35,27 +39,31 @@ void Graph::addEdge(int souVer, int DestVer){
 
 void Graph::addEdgeUsingMap(int souVer, int DestVer){
     //Check if map already has this value
-    //if not, insert a new entry - find() returns an iterator to that key value else it returns to the iterator to the end of the map
+
     it = myMap.find(souVer);
+     //if present, push the element
     if(it!= myMap.end()){
-        list<int> *temp = myMap[souVer];
-        temp->push_back(DestVer);
+        myMap[souVer].push_back(DestVer);
     }
-    //if present, push the element
+
+//if not, insert a new entry - find() returns an iterator to that key value else it returns to the iterator to the end of the map
     else{
-        auto temp = new list<int>;
-        myMap[souVer] = temp;
-        temp->push_back(DestVer);
+        list<int> l;
+        l.push_back(DestVer);
+        myMap[souVer] = l;
     }
 }
 
 void Graph::printAdjListFromMap(){
+    list<int>::iterator listIt;
+    list<int> tempList;
     for(it=myMap.begin();it!=myMap.end();it++){
-        cout<<it->first<<endl;
-        myMap[it->first]
-        for(it=adj[i].begin();it!=adj[i].end();++it){
-            cout << *it<<"-->";
+        cout<<it->first;
+        tempList = myMap[it->first];
+        for(listIt=tempList.begin();listIt!=tempList.end();++listIt){
+            cout << "-->"<<*listIt;
         }
+        cout<<endl;
     }
 }
 
@@ -69,35 +77,6 @@ void Graph::printAdjList(){
         cout <<endl;
     }
 }
-/*void Graph::BFS(int ver){
-
-    //create an array to keep track of visited nodes
-    bool *visited = new bool[v];
-    for(int i=0;i<v;i++){
-        visited[i] = false;
-    }
-
-    //Create a queue to save the vertices
-    queue<int> que;
-
-    visited[ver] = true;
-    que.push(ver);
-
-    list<int>::iterator it;
-
-    while(!que.empty()){
-        ver = que.front();
-        cout<<ver<<endl;
-        que.pop();
-
-        for(it=adj[ver].begin();it!=adj[ver].end();++it){
-            if(!visited[*it]){
-                visited[*it] = true;
-                que.push(*it);
-            }
-        }
-    }
-}*/
 
 int main(){
     Graph g(7);
@@ -119,15 +98,22 @@ int main(){
     g.addEdge(5,6);
     g.addEdge(6,5);
 
+    cout<<"Graph with Adjacency LinkedList"<<endl;
     g.printAdjList();
 
-    Graph gMap(2);
+
+    cout<<"Graph with Map"<<endl;
+    Graph gMap;
     gMap.addEdgeUsingMap(1,2);
     gMap.addEdgeUsingMap(1,3);
     gMap.addEdgeUsingMap(2,1);
+    gMap.addEdgeUsingMap(2,2);
+    gMap.addEdgeUsingMap(2,3);
+    gMap.addEdgeUsingMap(4,1);
+    gMap.addEdgeUsingMap(4,2);
+    gMap.addEdgeUsingMap(5,1);
     gMap.printAdjListFromMap();
 
-   // g.BFS(3);
-
+  
     return 0;
 }
