@@ -58,15 +58,18 @@ bool hasMatchingParantheses(string strExpression) {
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
+    //ofstream fout(getenv("OUTPUT_PATH"));
 
     bool res;
-    string strExpression;
-    getline(cin, strExpression);
+    //string strExpression = "1+(2+3)";
+    //string strExpression = ")1+(2+3)";
+    //string strExpression = "(1+(2+3)";
+    string strExpression = "(1+(2+3";
+    //getline(cin, strExpression);
 
     res = hasMatchingParantheses(strExpression);
-    fout << res << endl;
+    cout << res << endl;
 
-    fout.close();
+    //fout.close();
     return 0;
 }
