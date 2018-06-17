@@ -48,7 +48,9 @@ bool hasMatchingParantheses(string strExpression) {
             }
         }
     }
-    return true;
+    //this condition covers the case: (1+2+(3) || (1+2+(
+    if(s.empty()) return true;
+    return false;
 
 }
 
