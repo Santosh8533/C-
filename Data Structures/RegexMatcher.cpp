@@ -60,9 +60,14 @@ bool isMatch(string str,string regEx){
 
 
 int main(){
+        
+    //Test Case - 1
     string str = "saaabaan";
     string regEx = "s.*ba*n";
-    //sa*n
     cout<<"Match found?"<<isMatch(str,regEx);
-
+    
+    //Test Case - 2
+    str = "mississippi";
+    regEx = "mis*is*ip*.";
+    cout<<"Match found?"<<isMatch(str,regEx);
 }
