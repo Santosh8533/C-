@@ -147,14 +147,16 @@ void BinaryTree::PrintAllPathsInATree(){
 }
 
 void BinaryTree::PrintAllPathsUtil(Node* currRoot,vector<int> &v){
-    //if not a leaf node
+    //if root is null - print the paths
     if(currRoot==nullptr){
             printPaths(v);
             return;
     }
-
+    
+    //push the root value to the paths
     v.push_back(currRoot->value);
-    //if a leaf node
+    
+    //if it is a leaf node - print the paths - pop the leaf node
     if(currRoot->left == nullptr && currRoot->right==nullptr){
         printPaths(v);
         v.pop_back();
@@ -163,10 +165,11 @@ void BinaryTree::PrintAllPathsUtil(Node* currRoot,vector<int> &v){
 
     //traverse left
     PrintAllPathsUtil(currRoot->left,v);
+    
     //traverse right
     PrintAllPathsUtil(currRoot->right,v);
-    //}
-    //pop the element from the vector
+  
+    //Once the children are visited, pop itself(root) from paths
     v.pop_back();
 }
 
