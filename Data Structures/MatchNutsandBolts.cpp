@@ -6,7 +6,11 @@
     and bolt and sort the pairs.
     
     Ex: nuts[]={N2,N3,N1,N5,N4};
-        bolts[]={b5,b1,b2,b4,b3
+        bolts[]={B5,B1,B2,B4,B3};
+
+        Output:
+        nuts[]={N1,N2,N3,N4,N5};
+        bolts[]={B1,B2,B3,B4,B5};
 **/
 #include<stdio.h>
 #include<iostream>
