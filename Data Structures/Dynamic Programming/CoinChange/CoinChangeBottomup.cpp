@@ -1,41 +1,41 @@
-    /**
-        Author: Santosh Tandrothu
-        Date: 11/12/2018
-        Problem: Given an set of coins and amount, calculate no of ways to find amount
-        using giving coins
-    **/
+/***
+    Author: Santosh Tandrothu
+    Date: 11/12/2018
+	Given a set of coins and a amount, find the no of possible denominations by the coins
+	Ex: Amount = 5 Coins = {1,3,5}
+	Answer: 3 -> {11111,113,5}
+***/
 
-    /***
-        Time Complexity =
-        Space Complexity =
-    **/
+/***
+    Time Complexity = O(coins * amount) = O(n*k)
+    Space Complexity = O(amount) = O(n)
+***/
 
-#include <iostream>
-#include <vector>
-
-// C++11 lest unit testing framework
+#include<vector>
+#include<iostream>
 
 using namespace std;
 
-size_t changePossibilities(int amount,
-        const vector<int>& denominations)
-{
-    vector<size_t> waysofDoingNCents(amount+1); //vector of zeroes from 0..amount
-    waysofDoingNCents[0] = 1;
+size_t getNoOfPossibleDenominations(int amount,const vector<int>& coins){
+//	if(amount==0 || coins.size() ==0) throw invalid_argument(“Enter valid amount or coins”);
 
-    for(const int coin:denominations){
-        for(int incrementalAmount=coin;incrementalAmount<=amount;incrementalAmount++){
-            waysofDoingNCents[incrementalAmount]+= waysofDoingNCents[incrementalAmount-coin];
+	vector<size_t> lookup(amount+1);
+	lookup[0] = 1;//This is to cover the case when a coin is selected equal to its amount
+
+// Select all coins one by one
+	for(const int coin:coins){
+        // Build the lookup table for amounts for every coin
+        for(int currAmount = coin;currAmount<=amount;currAmount++){
+            int remAmount = currAmount - coin;
+            lookup[currAmount] = lookup[currAmount] + lookup[remAmount];
+            //cout<<currAmount<<":->"<<lookup[coin]<<endl;
         }
     }
-
-    return waysofDoingNCents[amount];
+    return lookup[amount];
 }
 
-
-
-int main(int argc, char** argv)
-{
-    cout<<changePossibilities(4,{1,2,3});
-    //return lest::run(tests, argc, argv);
+int main(){
+	vector<int> coins = {1,3,5};
+	int amount = 5;
+	cout<<"No of possible denominations for the given amount:"<<amount<<"->"<<getNoOfPossibleDenominations(amount,coins);
 }
