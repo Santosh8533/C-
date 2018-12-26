@@ -1,19 +1,20 @@
 #include<iostream>
+#include<vector>
 
 using namespace std;
 
 int findRepeat(const vector<int>& inputNumbers){
-	int start_ = 0;
-	int end_ = inputNumbers().size()-1;	
+	int start_ = 1; 
+	int end_ = inputNumbers.size()-1;	
 	
 	while(start_ < end_){
-		int mid = start_ + (end_-start_)/2;
+		int mid = start_ + (end_-start_)/2; 
 		
-		int lowerRangeStart = start_;
-		int lowerRangeEnd = mid;
+		int lowerRangeStart = start_; 
+		int lowerRangeEnd = mid; 
 	
-		int upperRangeStart = mid+1;
-		int upperRangeEnd = end_;
+		int upperRangeStart = mid+1; 
+		int upperRangeEnd = end_; 
 		
 		int itemsInlowerRange = 0;
 		
@@ -22,10 +23,10 @@ int findRepeat(const vector<int>& inputNumbers){
 				itemsInlowerRange++;
 			}
 		
-			int idealItemsInLowerRange = mid+1;
+			int idealItemsInLowerRange = lowerRangeEnd-lowerRangeStart + 1;
 			
 			if(itemsInlowerRange > idealItemsInLowerRange){
-				start_ = lowerRangeStart
+				start_ = lowerRangeStart;
 				end_ = lowerRangeEnd;
 			}
 			else {
@@ -39,7 +40,8 @@ int findRepeat(const vector<int>& inputNumbers){
 
 int main(){
 	
-	vector<int> inputNumbers = {1,2,3,4,5,6,7,8,9,9,10};
-	cout<<"The repeated number is:"<<findRepeat(inputNumbers);
+	vector<int> inputNumbers = {1,2,3,4,5,5};
+	int repeatedNumber = findRepeat(inputNumbers);
+	cout<<"The repeated number is:"<<repeatedNumber<<endl;
 	return 0;
 }
