@@ -1,3 +1,15 @@
+/***
+Author: Santosh Tandrothu
+Date: 12/24/2018
+Problem: Given a list of integers size N+1 with N unique integers , find the duplicate item in the list.
+Example: {2,4,3,5,5,1} -> 5
+***/
+
+/**
+Run-time complexity: O(nlogn)
+Space complexity: O(1)
+**/
+
 #include<iostream>
 #include<vector>
 
