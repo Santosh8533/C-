@@ -71,9 +71,13 @@ bool findPath(TreeNode* root, int val){
 TreeNode* LCA(TreeNode* root, int val1, int val2){
     if(root==nullptr)return root;
     if(root->val == val1 || root->val==val2){return root;}
+    /**Go to the left and look for either val1 or val2***/
     TreeNode* L = LCA(root->left,val1,val2);
-    TreeNode* R = LCA(root->right,val1,val2);.2
+    /**Go to the right and look for either val1 or val2***/
+    TreeNode* R = LCA(root->right,val1,val2);
+    /**if this root has both the elements, then this root is least common ancestor**/
     if(L&&R){return root;} //if val1 and val2 are left and right side of root - find(1,3)->ans:2
+    /***if this root side has only of the elements val1 or val2, then val1 or val2 will be on the other side of the root***/
     return L?L:R; //if val1 is present in the left subtree and val2 is present in the right subtree find(3,5)->4
 }
 int findLCA(TreeNode* root, int val1,int val2){
