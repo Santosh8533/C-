@@ -57,7 +57,7 @@ bool solveSudoku(int grid[N][N]){
 
         }
     }
-
+return false;
 }
 
 /* A utility function to print grid  */
